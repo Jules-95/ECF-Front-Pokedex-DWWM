@@ -1,42 +1,18 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pokedex</title>
-  </head>
+<!DOCTYPE html>
+<html lang="fr">
 
-  <body>
-    <h1>Test PokéAPI</h1>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Pokédex</title>
+	<meta name="description" content="Parcourez et recherchez des Pokémon grâce à la PokéAPI." />
 
-    <div id="resultat">Chargement...</div>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/helpers.css" />
+	<link rel="stylesheet" href="css/style.css" />
+</head>
 
-    <script>
-      fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          console.log(data);
-          document.getElementById("resultat").innerHTML = `
-        <p>Nom : ${data.name}</p>
-        <p>ID : ${data.id}</p>
-        <ul>
-            <li>
-        <img src="${data.sprites.front_default}" alt="pikachu">
-        <img src="${data.sprites.back_default}" alt="pikachu">
-            </li>
-            <li>
-        <img src="${data.sprites.front_shiny}" alt="pikachu shiny">
-        <img src="${data.sprites.back_shiny}" alt="pikachu shiny">
-            </li>
-        <p>Types : ${data.types.map((t) => t.type.name).join(", ")}</p>
-      `;
-        })
-        .catch(function (erreur) {
-          document.getElementById("resultat").innerHTML = "Erreur de connexion";
-          console.error(erreur);
-        });
-    </script>
-  </body>
+<body>
+
+</body>
 </html>
