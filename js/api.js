@@ -9,10 +9,7 @@ const URL_BASE = "https://pokeapi.co/api/v2";
 const POKEMONS_PAR_PAGE = 20;
 
 /* Traduction des types anglais → français.
-   Déclaré ici une seule fois, utilisé par app.js et detail.js.
-   Note : les noms des Pokémon eux-mêmes ne sont pas traduits —
-   cela nécessiterait un appel supplémentaire à /pokemon-species/{id}
-   pour chaque Pokémon, ce qui doublerait le nombre de requêtes. */
+   Déclaré ici une seule fois, utilisé par app.js et detail.js. */
 const traductionTypes = {
   fire: "Feu",
   water: "Eau",
@@ -51,9 +48,6 @@ function getImageUrl(id) {
 }
 
 /* Récupère les Pokémon d'une page donnée.
-   La PokéAPI ne retourne pas directement les détails dans la liste —
-   elle donne d'abord les noms et URLs, puis il faut une requête
-   individuelle par Pokémon pour obtenir ses types et son image.
    Promise.all() permet de faire ces 20 requêtes en parallèle plutôt
    qu'une par une, ce qui est beaucoup plus rapide.
    Retourne un tableau d'objets { id, nom, image, types }. */
@@ -81,8 +75,7 @@ async function getListePokemons(page) {
 }
 
 /* Récupère le nombre total de Pokémon dans l'API.
-   Le résultat est mis en cache après le premier appel pour éviter
-   de refaire la requête à chaque changement de page. */
+   Le résultat est mis en cache après le premier appel */
 let totalPokemonsCache = null;
 
 async function getNombreTotal() {

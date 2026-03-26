@@ -13,14 +13,11 @@ const boutonPrecedent  = document.getElementById("bouton-precedent");
 const boutonSuivant    = document.getElementById("bouton-suivant");
 const paginationNumeros = document.getElementById("pagination-numeros");
 
-/* Page affichée en ce moment.
-   Si l'utilisateur revient depuis une fiche détail, on restaure
-   la page qu'il consultait (sauvegardée dans sessionStorage). */
+/* Page affichée en ce moment. (sauvegardée dans sessionStorage). */
 let pageActuelle = parseInt(sessionStorage.getItem("pageRetour")) || 1;
 sessionStorage.removeItem("pageRetour");
 
-/* POKEMONS_PAR_PAGE et traductionTypes sont définis dans api.js
-   (chargé avant ce fichier) car ils sont partagés avec detail.js. */
+/* POKEMONS_PAR_PAGE et traductionTypes sont définis dans api.js*/
 
 /* --- Gestion des erreurs --- */
 
@@ -45,9 +42,7 @@ function creerCartePokemon(pokemon) {
   /* padStart(3, "0") formate le numéro sur 3 chiffres : 1 → "001", 25 → "025" */
   const numeroFormate = `#${String(pokemon.id).padStart(3, "0")}`;
 
-  /* On construit le HTML des badges de type avant de l'injecter dans la carte.
-     Chaque badge utilise une classe CSS type-{nom_anglais} pour sa couleur
-     (ex: type-fire → fond orange) et affiche le nom traduit en français. */
+  /* On construit le HTML des badges de type avant de l'injecter dans la carte. */
   const badgesTypes = pokemon.types
     .map((type) => {
       const traduction = traductionTypes[type] || type;
@@ -165,6 +160,7 @@ function filtrerPokemons() {
 /* --- Écouteurs d'événements --- */
 
 champRecherche.addEventListener("input", filtrerPokemons);
+// Bouton prévu pour le filtre dans tout le Pokédex
 boutonFiltrer.addEventListener("click", filtrerPokemons);
 
 boutonPrecedent.addEventListener("click", () => {

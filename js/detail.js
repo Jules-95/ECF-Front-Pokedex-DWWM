@@ -20,9 +20,7 @@ const detailEvolutions = document.getElementById("detail-evolutions");
 
 /* traductionTypes est défini dans api.js (chargé avant ce fichier) */
 
-/* Traduction des noms de stats anglais → français.
-   L'API retourne les stats sous forme de clés anglaises
-   (ex: "special-attack"), on les affiche en français. */
+/* Traduction des noms de stats anglais → français. */
 const traductionStats = {
   hp:               "PV",
   attack:           "Attaque",
@@ -58,9 +56,7 @@ function afficherStats(stats) {
     const nomTraduit = traductionStats[stat.stat.name] || stat.stat.name;
     const valeur = stat.base_stat;
 
-    /* On ramène la valeur à un pourcentage sur une base de 150
-       (valeur max raisonnable). On plafonne à 100% pour les Pokémon
-       légendaires qui peuvent dépasser 150 sur certaines stats. */
+    /* On ramène la valeur à un pourcentage sur une base de 150 */
     const pourcentage = Math.min((valeur / 150) * 100, 100);
 
     /* Couleur de la barre selon le niveau de la stat */
@@ -109,8 +105,7 @@ function afficherCapacites(capacites) {
 }
 
 /* --- Évolutions ---
-   C'est la partie la plus complexe. L'API d'évolution ne fait
-   pas partie des données du Pokémon directement — il faut :
+L'API d'évolution ne fait pas partie des données du Pokémon directement — il faut :
    1. Appeler /pokemon-species/{id} pour obtenir l'URL de la chaîne
    2. Appeler cette URL pour obtenir l'arbre d'évolutions
    3. Parcourir cet arbre (structure récursive) pour en extraire
@@ -152,7 +147,7 @@ async function afficherEvolutions(idPokemon) {
     }
 
     /* Affichage : image + nom pour chaque étape, séparés par une flèche →
-       Le Pokémon actuellement affiché reçoit la classe "actif" (mise en valeur) */
+       Le Pokémon actuellement affiché reçoit la classe "actif" */
     detailEvolutions.innerHTML = "";
 
     evolutions.forEach((evolution, index) => {
@@ -189,7 +184,7 @@ async function afficherEvolutions(idPokemon) {
   }
 }
 
-/* --- Fonction principale ---
+/* --- Fonction principale pour affichage---
    Orchestre tous les appels API et l'affichage de la fiche.
    La fiche est cachée par défaut dans le HTML (attribut hidden)
    et ne devient visible qu'une fois toutes les données chargées. */
