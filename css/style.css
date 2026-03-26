@@ -1,0 +1,519 @@
+/* ============================================
+   VARIABLES GLOBALES
+   Toutes les couleurs, tailles et effets
+   réutilisables dans tout le projet
+   ============================================ */
+
+:root {
+  /* --- Couleurs --- */
+  --couleur-fond:           #1a1a1a;   /* Fond général de la page et de l'en-tête */
+  --couleur-fond-carte:     #2a2a2a;   /* Fond des cartes Pokémon */
+  --couleur-bordure:        #3a3a3a;   /* Bordures */
+  --couleur-accent:         #e3350d;   /* Rouge Pokémon (hover, actif) */
+  --couleur-accent-hover:   #ff4d1f;   /* Rouge légèrement plus pour survol */
+
+  /* --- Texte --- */
+  --couleur-texte:          #f0f0f0;   /* Texte principal blanc cassé */
+  --couleur-texte-discret:  #888;      /* Texte secondaire (numéro, placeholder) */
+
+  /* --- Polices --- */
+  --police-titre:  'Bebas Neue', sans-serif;   /* Pour le titre du header */
+  --police-corps:  'Nunito', sans-serif;        /* Pour tout le reste */
+
+  /* --- Espacements --- */
+  --espace-xs:  0.4rem;   /*  4px */
+  --espace-sm:  0.8rem;   /*  8px */
+  --espace-md:  1.6rem;   /* 16px */
+  --espace-lg:  2.4rem;   /* 24px */
+  --espace-xl:  4.0rem;   /* 40px */
+
+  /* --- Arrondis --- */
+  --arrondi-sm:     0.8rem;
+  --arrondi-md:     1.2rem;
+  --arrondi-lg:     1.6rem;
+  --arrondi-pilule: 10rem;   /* Pour les badges de types */
+
+  /* --- Ombres --- */
+  --ombre-carte:       0 4px 20px rgba(0, 0, 0, 0.5);
+  --ombre-carte-hover: 0 8px 30px rgba(227, 53, 13, 0.3);
+
+  /* --- Transitions --- */
+  --transition-rapide: 0.2s ease;
+}
+
+
+/* ============================================
+   BASE
+   Styles appliqués à l'ensemble du document
+   ============================================ */
+
+body {
+  font-family: var(--police-corps);
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;   /* Pour coller le footer en bas */
+}
+
+/* Conteneur centré avec largeur maximale */
+.conteneur {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--espace-md);
+}
+
+/* Style du focus clavier (accessibilité WCAG) */
+:focus-visible {
+  outline: 3px solid var(--couleur-accent);
+  outline-offset: 3px;
+  border-radius: var(--arrondi-sm);
+}
+
+
+/* ============================================
+   EN-TÊTE (HEADER)
+   Logo à gauche, recherche à droite
+   ============================================ */
+
+.header {
+  background-color: var(--couleur-fond);
+  border-bottom: 1px solid var(--couleur-bordure);
+  padding: var(--espace-md) var(--espace-xl);
+  position: sticky;   /* Reste visible en scrollant */
+  top: 0;
+  z-index: 100;
+}
+
+/* Flex row : logo à gauche, recherche à droite
+   max-width et margin auto déjà gérés par .conteneur parent */
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo = lien cliquable (Pokéball + texte) */
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-sm);
+  text-decoration: none;
+  color: var(--couleur-texte);
+}
+
+
+.header__titre {
+  font-family: var(--police-titre);
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  color: var(--couleur-texte);
+}
+
+
+/* ============================================
+   BARRE DE RECHERCHE (dans le header)
+   ============================================ */
+
+.header__recherche {
+  flex-shrink: 0;
+}
+
+/* Wrapper input + loupe + bouton */
+.recherche__champ {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+  border: 1.5px solid var(--couleur-bordure);
+  border-radius: var(--arrondi-pilule);
+  padding: var(--espace-xs) var(--espace-sm);
+  gap: var(--espace-sm);
+  transition: border-color var(--transition-rapide);
+}
+
+.recherche__champ:focus-within {
+  border-color: var(--couleur-accent);
+}
+
+
+.recherche__input {
+  background: transparent;
+  border: none;
+  color: var(--couleur-texte);
+  font-size: 1.5rem;
+  width: 20rem;
+  outline: none;
+}
+
+.recherche__input::placeholder {
+  color: var(--couleur-texte-discret);
+}
+
+/* Supprime la croix native du type="search" sur Chrome */
+.recherche__input::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* Bouton Filtrer */
+.recherche__bouton {
+  background-color: var(--couleur-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--arrondi-pilule);
+  padding: var(--espace-xs) var(--espace-md);
+  font-family: var(--police-corps);
+  font-size: 1.4rem;
+  font-weight: 700;
+  transition: background-color var(--transition-rapide);
+  white-space: nowrap;
+}
+
+.recherche__bouton:hover {
+  background-color: var(--couleur-accent-hover);
+}
+
+
+/* ============================================
+   CONTENU PRINCIPAL
+   ============================================ */
+
+main {
+  flex: 1;   /* Pousse le footer vers le bas */
+  padding: var(--espace-xl) 0;
+}
+
+
+/* ============================================
+   MESSAGES D'ERREUR ET VIDE
+   ============================================ */
+
+.message-erreur {
+  background-color: rgba(227, 53, 13, 0.12);
+  border: 1px solid var(--couleur-accent);
+  border-radius: var(--arrondi-md);
+  padding: var(--espace-md) var(--espace-lg);
+  color: #ff6b4a;
+  font-weight: 600;
+  margin-bottom: var(--espace-lg);
+  text-align: center;
+}
+
+.message-vide {
+  text-align: center;
+  color: var(--couleur-texte-discret);
+  font-size: 1.8rem;
+  padding: var(--espace-xl) 0;
+}
+
+
+/* ============================================
+   GRILLE DES POKÉMON
+   ============================================ */
+
+.grille-pokemons {
+  display: grid;
+  /* S'adapte automatiquement : min 200px par carte */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--espace-md);
+  margin-bottom: var(--espace-xl);
+}
+
+
+/* ============================================
+   CARTE POKÉMON
+   Structure : numéro en haut à droite,
+   image centrée, nom, badges de types
+   ============================================ */
+
+.carte-pokemon {
+  background-color: var(--couleur-fond-carte);
+  border: 2px solid transparent;   /* Bordure invisible par défaut */
+  border-radius: var(--arrondi-lg);
+  overflow: hidden;
+  box-shadow: var(--ombre-carte);
+  transition:
+    transform var(--transition-rapide),
+    border-color var(--transition-rapide),
+    box-shadow var(--transition-rapide);
+}
+
+/* Hover souris et focus clavier : même effet visuel */
+.carte-pokemon:hover,
+.carte-pokemon:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--couleur-accent);
+  box-shadow: var(--ombre-carte-hover);
+}
+
+/* Le lien couvre toute la carte */
+.carte-pokemon__lien {
+  display: block;
+  padding: var(--espace-md);
+  text-decoration: none;
+  color: inherit;
+  position: relative;   /* Pour positionner le numéro en absolu */
+}
+
+/* Numéro en haut à droite (#001, #002...) */
+.carte-pokemon__numero {
+  position: absolute;
+  top: var(--espace-sm);
+  right: var(--espace-sm);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--couleur-texte-discret);
+}
+
+/* Zone image */
+.carte-pokemon__image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  margin-bottom: var(--espace-md);
+}
+
+.carte-pokemon__image {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  image-rendering: pixelated; /* Rendu net pour les sprites 96x96 */
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+  transition: transform var(--transition-rapide);
+}
+
+/* L'image grossit légèrement au hover */
+.carte-pokemon:hover .carte-pokemon__image {
+  transform: scale(1.08);
+}
+
+/* Nom du Pokémon */
+.carte-pokemon__nom {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  text-align: center;
+  margin-bottom: var(--espace-sm);
+}
+
+/* Conteneur des badges de types */
+.carte-pokemon__types {
+  display: flex;
+  gap: var(--espace-xs);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+/* ============================================
+   BADGES DE TYPES
+   Forme pilule, couleur spécifique par type
+   ============================================ */
+
+.badge-type {
+  display: inline-block;
+  padding: 0.3rem 1.2rem;
+  border-radius: var(--arrondi-pilule);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+/* Couleur par type (noms en français dans les classes, type API en anglais géré en JS) */
+.type-fire,     .type-feu       { background-color: #F08030; }
+.type-water,    .type-eau       { background-color: #6890F0; }
+.type-grass,    .type-plante    { background-color: #4CAF50; }
+.type-electric, .type-electrik  { background-color: #F8D030; color: #333; }
+.type-ice,      .type-glace     { background-color: #98D8D8; color: #333; }
+.type-fighting, .type-combat    { background-color: #C03028; }
+.type-poison                    { background-color: #A040A0; }
+.type-ground,   .type-sol       { background-color: #E0C068; color: #333; }
+.type-flying,   .type-vol       { background-color: #7B68EE; }
+.type-psychic,  .type-psy       { background-color: #F85888; }
+.type-bug,      .type-insecte   { background-color: #8BC34A; }
+.type-rock,     .type-roche     { background-color: #B8A038; }
+.type-ghost,    .type-spectre   { background-color: #705898; }
+.type-dragon                    { background-color: #7038F8; }
+.type-dark,     .type-tenebre   { background-color: #705848; }
+.type-steel,    .type-acier     { background-color: #B8B8D0; color: #333; }
+.type-fairy,    .type-fee       { background-color: #EE99AC; color: #333; }
+.type-normal                    { background-color: #6d6d6d; }
+
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-sm);
+  flex-wrap: wrap;
+  margin-top: var(--espace-xl);
+}
+
+/* Styles communs aux flèches et aux numéros de page */
+.pagination__fleche,
+.pagination__numero {
+  background-color: var(--couleur-fond-carte);
+  color: var(--couleur-texte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-rapide), border-color var(--transition-rapide);
+}
+
+.pagination__fleche:hover:not(:disabled),
+.pagination__numero:hover {
+  background-color: var(--couleur-bordure);
+  border-color: var(--couleur-accent);
+}
+
+/* Flèches < et > */
+.pagination__fleche {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.pagination__fleche:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Liste des numéros */
+.pagination__numeros {
+  display: flex;
+  gap: var(--espace-xs);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Chaque numéro de page */
+.pagination__numero {
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Page active : fond rouge */
+.pagination__numero--actif {
+  background-color: var(--couleur-accent);
+  border-color: var(--couleur-accent);
+  color: #fff;
+}
+
+
+/* ============================================
+   PIED DE PAGE (FOOTER)
+   ============================================ */
+
+.footer {
+  background-color: var(--couleur-fond);
+  border-top: 1px solid var(--couleur-bordure);
+  padding: var(--espace-lg) 0;
+  text-align: center;
+  color: var(--couleur-texte-discret);
+  font-size: 1.4rem;
+}
+
+.footer a {
+  color: var(--couleur-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Lien "Aller à la pagination" — caché sur desktop, visible sur mobile */
+.lien-pagination-mobile {
+  display: none;
+}
+
+/* Tablette (≤ 1024px) */
+@media (max-width: 1024px) {
+  .recherche__input {
+    width: 16rem;
+  }
+
+  .grille-pokemons {
+    grid-template-columns: repeat(2, 1fr); /* Deux colones */
+    gap: var(--espace-sm);
+  }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  /* Le header passe en colonne sur mobile */
+  .header {
+    padding: var(--espace-md);
+  }
+
+  .header__inner {
+    flex-direction: column;
+    gap: var(--espace-md);
+    align-items: stretch;
+  }
+
+  .header__logo {
+    justify-content: center;
+  }
+
+  /* La barre de recherche prend toute la largeur */
+  .recherche__input {
+    width: 100%;
+    flex: 1;
+  }
+
+  .grille-pokemons {
+    grid-template-columns: repeat(1, 1fr); /* 1 colonne */
+    gap: var(--espace-sm);
+  }
+
+  /* Lien rapide vers la pagination */
+  .lien-pagination-mobile {
+    display: block;
+    text-align: center;
+    color: var(--couleur-texte-discret);
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: var(--espace-sm) 0;
+    margin-bottom: var(--espace-md);
+  }
+
+  .lien-pagination-mobile:hover {
+    color: var(--couleur-accent);
+  }
+
+  .carte-pokemon__image-wrapper {
+    height: 200px;
+  }
+
+  .carte-pokemon__image {
+    width: 160px;
+    height: 160px;
+  }
+
+}
+
+@media (max-width: 500px) {
+  /* Cacher les numéros de page sur très petit écran */
+  .pagination__numeros {
+    display: none;
+  }
+}

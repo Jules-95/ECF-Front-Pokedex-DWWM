@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Détails du Pokémon — Pokédex" />
+    <title>Détail — Pokédex</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/helpers.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+  </head>
+
+  <body>
+
+    <!-- EN-TÊTE (identique à index.html) -->
+    <header class="header">
+      <div class="conteneur">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo" aria-label="Retour à l'accueil">
+          <span class="header__titre">Pokédex</span>
+        </a>
+      </div>
+      </div>
+    </header>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main id="contenu-principal">
+      <div class="conteneur">
+
+        <!-- Bouton retour -->
+        <a href="index.html" class="bouton-retour" aria-label="Retour à la liste">
+          ← Retour à la liste
+        </a>
+
+        <!-- Message d'erreur (caché par défaut) -->
+        <div
+          id="message-erreur"
+          class="message-erreur"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <!-- Fiche détail (remplie par detail.js) -->
+        <div id="fiche-detail" class="fiche-detail" hidden>
+
+          <!-- COLONNE GAUCHE : images + types -->
+          <div class="fiche-detail__colonne-gauche">
+
+            <p id="detail-numero" class="detail-numero"></p>
+            <h1 id="detail-nom" class="detail-nom"></h1>
+
+            <!-- Badges de types -->
+            <div id="detail-types" class="detail-types"></div>
+
+            <!-- Images : face + dos -->
+            <div class="detail-images">
+              <div class="detail-image-wrapper">
+                <img
+                  id="detail-image-face"
+                  class="detail-image"
+                  src=""
+                  alt=""
+                />
+                <span class="detail-image-legende">Face</span>
+              </div>
+              <div class="detail-image-wrapper">
+                <img
+                  id="detail-image-dos"
+                  class="detail-image detail-image--dos"
+                  src=""
+                  alt=""
+                />
+                <span class="detail-image-legende">Dos</span>
+              </div>
+            </div>
+
+            <!-- Poids et taille -->
+            <div class="detail-infos-physiques">
+              <div class="detail-info-physique">
+                <span class="detail-info-physique__label">Taille</span>
+                <span id="detail-taille" class="detail-info-physique__valeur"></span>
+              </div>
+              <div class="detail-info-physique">
+                <span class="detail-info-physique__label">Poids</span>
+                <span id="detail-poids" class="detail-info-physique__valeur"></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- COLONNE DROITE : stats + capacités + évolutions -->
+          <div class="fiche-detail__colonne-droite">
+
+            <!-- Statistiques -->
+            <section class="detail-section" aria-label="Statistiques">
+              <h2 class="detail-section__titre">Statistiques</h2>
+              <ul id="detail-stats" class="detail-stats"></ul>
+            </section>
+
+            <!-- Capacités -->
+            <section class="detail-section" aria-label="Capacités">
+              <h2 class="detail-section__titre">Capacités</h2>
+              <ul id="detail-capacites" class="detail-capacites"></ul>
+            </section>
+
+            <!-- Évolutions -->
+            <section class="detail-section" aria-label="Évolutions">
+              <h2 class="detail-section__titre">Évolutions</h2>
+              <div id="detail-evolutions" class="detail-evolutions"></div>
+            </section>
+
+          </div>
+
+        </div>
+        <!-- fin fiche-detail -->
+
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="conteneur">
+        <p>Données fournies par <a href="https://pokeapi.co" target="_blank" rel="noopener noreferrer">PokéAPI</a></p>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/api.js"></script>
+    <script src="js/detail.js"></script>
+
+  </body>
+</html>

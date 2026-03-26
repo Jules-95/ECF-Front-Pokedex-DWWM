@@ -1,30 +1,32 @@
-
-/* Débuggueur CSS  */
+/* Débogueur CSS — décommenter pour voir les contours de tous les éléments */
 /* * {
   outline: 1px solid red;
 } */
 
+/* Base de calcul des rem : 1rem = 10px (au lieu de 16px par défaut)
+   Cela simplifie les calculs : 1.6rem = 16px, 2.4rem = 24px, etc. */
 html {
-    font-size: 62.5%; /* 1rem = 10px avec une base utilisateur de 16px */
+  font-size: 62.5%;
 }
 
-/* Remove focus for mouse users */
+/* Suppression du contour de focus pour les utilisateurs à la souris.
+   :focus-visible ne s'active que pour la navigation clavier → meilleure UX. */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Set core body defaults */
+/* Taille de texte de base recalculée après le 62.5% sur html */
 body {
   font-size: 1.6rem;
 }
 
-/* Set text selection */
+/* Couleur de sélection de texte personnalisée */
 ::selection {
   color: #000;
   background-color: #fd0;
 }
 
-/* Set cursor pointer */
+/* Curseur pointer sur les éléments interactifs */
 label[for],
 button,
 input[type="submit"],
@@ -32,12 +34,13 @@ select {
   cursor: pointer;
 }
 
-/* Remove font style on address */
+/* Suppression de l'italique sur les balises <address> */
 address {
   font-style: normal;
 }
 
-/* Text meant only for screen readers. */
+/* Classe utilitaire : masque visuellement un élément mais le garde
+   accessible aux lecteurs d'écran (ex: labels de formulaire cachés) */
 .screen-reader-text {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
@@ -47,7 +50,7 @@ address {
   white-space: nowrap;
 }
 
-/* Image replacement technique 2012 H5BP  - https://css-tricks.com/the-image-replacement-museum/ */
+/* Technique de remplacement d'image par du texte (accessibilité) */
 .ir {
   font: 0/0 a;
   color: transparent;
@@ -55,7 +58,7 @@ address {
   text-shadow: none;
 }
 
-/* Print external URLs */
+/* Impression : affiche l'URL des liens entre parenthèses */
 @media print {
   a[href]:not([href^='#'])::after {
     content: '('attr(href)')';

@@ -1,11 +1,11 @@
-/* Box sizing rules */
+/* Modèle de boîte unifié sur tous les éléments */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Remove default margin */
+/* Suppression des marges par défaut des éléments de contenu */
 body,
 h1,
 h2,
@@ -19,7 +19,8 @@ dd {
   margin: 0;
 }
 
-/* Remove list styles, margin and padding on ul, ol elements with a class, which suggests default styling will be removed */
+/* Suppression des styles de liste sur les éléments <ul> et <ol> avec une classe
+   (quand on leur donne une classe, c'est qu'on gère le style nous-mêmes) */
 ul[class],
 ol[class] {
   margin: 0;
@@ -27,31 +28,31 @@ ol[class] {
   list-style: none;
 }
 
-/* Set core root defaults */
+/* Défilement fluide activé par défaut sur la page */
 html {
   scroll-behavior: smooth;
 }
 
-/* Set core body defaults */
+/* Hauteur minimale pour que le footer reste en bas même sur une page courte */
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
 
-/* A elements that don't have a class get default styles */
+/* Les liens sans classe gardent le soulignement intelligent (ignore les descentes de lettre) */
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-/* Make images easier to work with */
+/* Les images ne débordent jamais de leur conteneur et s'affichent en bloc */
 img,
 picture {
   max-width: 100%;
   display: block;
 }
 
-/* Inherit fonts for inputs and buttons */
+/* Les champs de formulaire héritent de la police du site (sinon le navigateur applique la sienne) */
 input,
 button,
 textarea,
@@ -59,12 +60,13 @@ select {
   font: inherit;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+/* Accessibilité : on désactive toutes les animations pour les utilisateurs
+   qui ont activé "réduire les animations" dans leurs préférences système */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
    scroll-behavior: auto;
   }
-  
+
   *,
   *::before,
   *::after {

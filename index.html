@@ -1,18 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Pokédex interactif — parcourez et recherchez tous les Pokémon grâce à la PokéAPI."
+    />
+    <title>Pokédex</title>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Pokédex</title>
-	<meta name="description" content="Parcourez et recherchez des Pokémon grâce à la PokéAPI." />
+    <!-- Google Fonts : Nunito pour le corps, Bebas Neue pour le titre -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-	<link rel="stylesheet" href="css/reset.css" />
-	<link rel="stylesheet" href="css/helpers.css" />
-	<link rel="stylesheet" href="css/style.css" />
-</head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/helpers.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<body>
+  <body>
+    <!-- ==============================
+         HEADER
+    =============================== -->
+    <header class="header">
+      <div class="conteneur">
+      <div class="header__inner">
+        <a
+          href="index.html"
+          class="header__logo"
+          aria-label="Retour à l'accueil"
+        >
+          <span class="header__titre">Pokédex</span>
+        </a>
 
-</body>
+        <!-- Barre de recherche -->
+        <div class="header__recherche">
+          <div class="recherche__champ">
+            <label for="champ-recherche" class="screen-reader-text">Rechercher un Pokémon par nom</label>
+            <input
+              type="search"
+              id="champ-recherche"
+              class="recherche__input"
+              placeholder="Rechercher..."
+              autocomplete="off"
+            />
+            <button
+              type="button"
+              id="bouton-filtrer"
+              class="recherche__bouton"
+              aria-label="Lancer la recherche"
+            >
+              Filtrer
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </header>
+
+    <!-- ==============================
+         CONTENU PRINCIPAL
+    =============================== -->
+    <main id="contenu-principal">
+      <div class="conteneur">
+        <!-- Message d'erreur (caché par défaut, affiché par JS si besoin) -->
+        <div
+          id="message-erreur"
+          class="message-erreur"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <!-- Message "aucun résultat" (caché par défaut) -->
+        <p
+          id="message-vide"
+          class="message-vide"
+          role="status"
+          aria-live="polite"
+          hidden
+        >
+          Aucun Pokémon trouvé avec ce nom.
+        </p>
+
+        <!-- Lien rapide vers la pagination (visible uniquement sur mobile) -->
+        <a href="#pagination" class="lien-pagination-mobile">Aller à la pagination ↓</a>
+
+        <!-- Grille des cartes Pokémon (remplie par app.js) -->
+        <section aria-label="Liste des Pokémon">
+          <ul id="grille-pokemons" class="grille-pokemons" aria-live="polite">
+            <!-- Les cartes sont générées ici par JavaScript -->
+          </ul>
+        </section>
+
+        <!-- Pagination -->
+        <nav class="pagination" aria-label="Pagination" id="pagination">
+          <button
+            type="button"
+            class="pagination__fleche"
+            id="bouton-precedent"
+            aria-label="Page précédente"
+            disabled
+          >
+            &#8249;
+          </button>
+
+          <!-- Les numéros de page sont générés ici par app.js -->
+          <ol
+            class="pagination__numeros"
+            id="pagination-numeros"
+            aria-label="Pages disponibles"
+          ></ol>
+
+          <button
+            type="button"
+            class="pagination__fleche"
+            id="bouton-suivant"
+            aria-label="Page suivante"
+          >
+            &#8250;
+          </button>
+        </nav>
+      </div>
+    </main>
+
+    <!-- ==============================
+         FOOTER
+    =============================== -->
+    <footer class="footer">
+      <div class="conteneur">
+        <p>
+          Données fournies par
+          <a href="https://pokeapi.co" target="_blank" rel="noopener noreferrer"
+            >PokéAPI</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <!-- JavaScript (chargé en dernier pour que le HTML soit prêt) -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>
